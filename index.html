@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Md. Anwar Hossain — Portfolio</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Fonts: Poppins + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary-1: #4a00e0;   /* indigo */
+      --primary-2: #00d2ff;  /* cyan */
+      --muted: #55607a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#fbfdff 0%, #f7fbff 100%), 
+                  url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* NAVBAR */
+    .navbar-brand {
+      font-weight: 700;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(90deg,var(--primary-1),var(--primary-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-link { color: #1f2937; }
+    .nav-link:hover { color: var(--primary-1); }
+
+    /* HERO / PROFILE BLOCK */
+    .hero {
+      margin-top: 4.5rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9));
+      border-radius: 1rem;
+      padding: 2.2rem;
+      box-shadow: 0 12px 40px rgba(15,23,36,0.08);
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 1.6rem;
+      align-items: center;
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align:center; }
+    }
+
+    .profile-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), #fff);
+      border-radius: .9rem;
+      padding: 1.2rem;
+      display:flex;
+      gap: 1rem;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid rgba(74,0,224,0.12);
+      box-shadow: 0 10px 30px rgba(74,0,224,0.08);
+    }
+
+    .badge-roles {
+      background: linear-gradient(90deg,var(--primary-1),var(--primary-2));
+      color: white;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+      display:inline-flex;
+      gap:.5rem;
+      align-items:center;
+    }
+
+    .hero-info h1 {
+      font-family:"Poppins", sans-serif;
+      font-weight:700;
+      margin-bottom: 0.15rem;
+      letter-spacing: -0.5px;
+    }
+    .hero-info p.lead {
+      color: var(--muted);
+      margin-bottom: .9rem;
+      font-size: 1.02rem;
+    }
+    .ctas .btn {
+      border-radius: 999px;
+      padding: .6rem 1.2rem;
+      font-weight:600;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      display:flex;
+      align-items:center;
+      gap:0.8rem;
+      margin-bottom:1rem;
+    }
+    .section-title h2 {
+      margin:0;
+      font-weight:700;
+      font-size:1.4rem;
+    }
+    .section-title .line { flex:1; height:2px; background:linear-gradient(90deg,var(--primary-1),var(--primary-2)); border-radius:4px; opacity:.18; }
+
+    /* CARDS */
+    .card-modern {
+      border-radius: .9rem;
+      border: 1px solid rgba(15,23,36,0.04);
+      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+    }
+    .card-modern:hover { transform: translateY(-8px); box-shadow: 0 18px 45px rgba(2,6,23,0.08); }
+
+    /* BULLETS */
+    .bullets { padding-left: 1.15rem; margin: 0; }
+    .bullets li { margin-bottom: .45rem; color: #253041; }
+
+    /* SKILL LIST */
+    .skills-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: .8rem; }
+    .skill-pill {
+      background: linear-gradient(90deg, rgba(74,0,224,0.06), rgba(0,210,255,0.04));
+      border-radius: 999px;
+      padding: .5rem .8rem;
+      display:inline-flex;
+      gap:.5rem;
+      align-items:center;
+      color:#132033;
+      font-weight:600;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-img { height:160px; object-fit:cover; border-top-left-radius:.8rem; border-top-right-radius:.8rem; }
+    .portfolio-card .card-body { padding: 1rem; }
+
+    /* TESTIMONIAL */
+    .quote { font-style: italic; color: #374151; }
+
+    /* CONTACT */
+    .contact-card { max-width:680px; margin:auto; }
+    .form-status { min-height: 1.2rem; font-weight:600; }
+
+    /* GO TOP button */
+    #goTop {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: linear-gradient(90deg,var(--primary-1),var(--primary-2));
+      color: #fff;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(15,23,36,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index: 999;
+      transition: transform .18s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #goTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    /* tiny helpers */
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3 fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Md. Anwar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container" style="padding-top:5.25rem; padding-bottom:4rem;">
+
+    <!-- HERO -->
+    <section class="hero mb-5" id="home" aria-labelledby="hero-heading">
+      <div class="profile-card text-center" data-aos="fade-up">
+        <img src="https://avatars.githubusercontent.com/u/47779080?v=4" alt="Md. Anwar" class="profile-photo mb-3">
+        <div class="text-center">
+          <div class="badge-roles mb-2"><i class="bi bi-laptop"></i> Full-Stack Developer</div>
+          <h4 class="mb-0 mt-2">Md. Anwar Hossain</h4>
+          <p class="muted mb-2">Laravel • Vue.js • WordPress • Graphic Design</p>
+          <div class="d-flex gap-2 justify-content-center mt-2">
+            <a href="#contact" class="btn btn-primary btn-custom"><i class="bi bi-envelope"></i> Hire Me</a>
+            <a href="#portfolio" class="btn btn-outline-secondary"><i class="bi bi-briefcase"></i> View Work</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-info" data-aos="fade-left">
+        <h1 id="hero-heading">I build performant web apps & meaningful brands</h1>
+        <p class="lead">I craft scalable Laravel backends, dynamic Vue.js frontends and beautiful WordPress experiences. I also design visuals and automate processes to save time for businesses.</p>
+
+        <div class="row g-3 mt-3">
+          <div class="col-md-6">
+            <div class="card-modern p-3">
+              <h5 class="mb-1"><i class="bi bi-speedometer2 text-primary"></i> Fast & Reliable</h5>
+              <p class="muted mb-0">Optimized performance and clean architecture for long-term maintainability.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-modern p-3">
+              <h5 class="mb-1"><i class="bi bi-people text-primary"></i> Clear Communication</h5>
+              <p class="muted mb-0">Transparent timelines, regular updates and client-focused delivery.</p>
+            </div>
+          </div>
+        </div>
+
+        <ul class="mt-4 bullets">
+          <li>✓ 6 years professional experience</li>
+          <li>✓ Delivered e-commerce, admin panels, dashboards</li>
+          <li>✓ Payment integrations (SSLCommerz, bKash, Rocket)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-card-checklist fs-4 text-primary"></i>
+        <h2>Services</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card card-modern p-3 h-100">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-3 text-primary"><i class="bi bi-code-slash"></i></div>
+              <div>
+                <h5 class="mb-1">Custom Web Applications</h5>
+                <p class="muted mb-0">Laravel-based applications, REST APIs, user roles, reports and integrations tailored to your business.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card card-modern p-3 h-100">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-3 text-primary"><i class="bi bi-shop"></i></div>
+              <div>
+                <h5 class="mb-1">WordPress & eCommerce</h5>
+                <p class="muted mb-0">Custom themes, speed optimization and WooCommerce setup for conversion-focused stores.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card card-modern p-3 h-100">
+            <div class="d-flex align-items-start gap-3">
+              <div class="fs-3 text-primary"><i class="bi bi-palette"></i></div>
+              <div>
+                <h5 class="mb-1">Design & Branding</h5>
+                <p class="muted mb-0">Logo, banners and UI elements with consistent brand language and pixel-perfect assets.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-bar-chart-line fs-4 text-primary"></i>
+        <h2>Skills</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card card-modern p-3">
+            <h5><i class="bi bi-laptop"></i> Programming Languages & Frameworks</h5>
+            <ul class="bullets mt-2 mb-0">
+              <li>• PHP (Laravel, Lumen)</li>
+              <li>• JavaScript (Vue.js, jQuery, ES6+)</li>
+              <li>• HTML5 & CSS3 (Bootstrap 5, Tailwind basics)</li>
+              <li>• SQL (MySQL, PostgreSQL)</li>
+            </ul>
+          </div>
+
+          <div class="card card-modern p-3 mt-3">
+            <h5><i class="bi bi-tools"></i> Tools & Practices</h5>
+            <ul class="bullets mt-2 mb-0">
+              <li>• Git & GitHub (version control)</li>
+              <li>• REST API design & integration</li>
+              <li>• Unit testing, debugging & performance tuning</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card card-modern p-3">
+            <h5><i class="bi bi-award"></i> Packages & Libraries</h5>
+            <div class="mt-2 skills-grid">
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Composer</span>
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Vuex / Pinia</span>
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Axios</span>
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Tailwind CSS</span>
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Chart.js</span>
+              <span class="skill-pill"><i class="bi bi-check2-circle"></i> Migrations & Eloquent</span>
+            </div>
+          </div>
+
+          <div class="card card-modern p-3 mt-3">
+            <h5><i class="bi bi-grid-3x3-gap"></i> Excel & Automation</h5>
+            <ul class="bullets mt-2 mb-0">
+              <li>• Advanced Excel formulas & dashboards</li>
+              <li>• VBA scripting & process automation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LARAVEL (Separate Section) -->
+    <section id="laravel" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-fire fs-4 text-primary"></i>
+        <h2>Laravel Expertise</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="card card-modern p-3">
+        <div class="row align-items-center">
+          <div class="col-md-2 text-center">
+            <i class="bi bi-server fs-1 text-primary"></i>
+          </div>
+          <div class="col-md-10">
+            <p class="muted mb-1">Deep experience building robust backends with Laravel:</p>
+            <ul class="bullets mb-0">
+              <li>• Application architecture & service layering</li>
+              <li>• RESTful API development & token-based auth (Passport / Sanctum)</li>
+              <li>• Database design, migrations, Eloquent ORM and optimization</li>
+              <li>• Queue/jobs, scheduled tasks and email notifications</li>
+              <li>• Payment gateway integrations and secure transactions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORDPRESS (Separate Section) -->
+    <section id="wordpress" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-wordpress fs-4 text-primary"></i>
+        <h2>WordPress & WooCommerce</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="card card-modern p-3">
+        <div class="row align-items-center">
+          <div class="col-md-2 text-center">
+            <i class="bi bi-shop-window fs-1 text-primary"></i>
+          </div>
+          <div class="col-md-10">
+            <p class="muted mb-1">Professional WordPress services focused on performance and conversions:</p>
+            <ul class="bullets mb-0">
+              <li>• Custom themes & template hierarchy</li>
+              <li>• WooCommerce store setup and checkout optimization</li>
+              <li>• Speed optimization, security hardening and SEO basics</li>
+              <li>• Plugin integration and small custom plugin development</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-collection fs-4 text-primary"></i>
+        <h2>Portfolio</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card portfolio-card">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" class="portfolio-img" alt="Project - Transport Agency">
+            <div class="card-body">
+              <h5 class="card-title">Transport Agency Website</h5>
+              <p class="muted mb-0">WordPress site with booking flows and payment gateway integration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card portfolio-card">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" class="portfolio-img" alt="Project - Laravel Clone">
+            <div class="card-body">
+              <h5 class="card-title">Laravel Mini Clone</h5>
+              <p class="muted mb-0">Ecommerce-like platform with admin panel and reporting features.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card portfolio-card">
+            <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=800&q=80" class="portfolio-img" alt="Project - Vue Dashboard">
+            <div class="card-body">
+              <h5 class="card-title">Vue.js Dashboard</h5>
+              <p class="muted mb-0">Real-time dashboard with charts and notifications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="mb-5" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-chat-dots fs-4 text-primary"></i>
+        <h2>Testimonials</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card card-modern p-3">
+            <p class="quote">"Delivered ahead of schedule and code quality was top-notch."</p>
+            <p class="muted mb-0"><strong>— Client A</strong></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-modern p-3">
+            <p class="quote">"Great communication and excellent payment integration work."</p>
+            <p class="muted mb-0"><strong>— Client B</strong></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-modern p-3">
+            <p class="quote">"Automation saved our team hours every week."</p>
+            <p class="muted mb-0"><strong>— Client C</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mb-4" data-aos="fade-up">
+      <div class="section-title">
+        <i class="bi bi-envelope fs-4 text-primary"></i>
+        <h2>Contact</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="card card-modern contact-card p-4">
+        <p class="muted mb-3">Prefer email? <strong>anwar@example.com</strong> — or use the form below and I'll reply within 48 hours.</p>
+
+        <!-- Form (AJAX via jQuery) -->
+        <form id="my-form" action="https://formspree.io/f/mwpqanjd" method="POST" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Your name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Full name (optional)">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email *</label>
+            <input type="email" id="email" name="_replyto" class="form-control" placeholder="your.email@example.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message *</label>
+            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Briefly tell me about your project..." required></textarea>
+          </div>
+
+          <!-- hidden subject -->
+          <input type="hidden" name="_subject" value="Portfolio Contact: New message">
+
+          <div class="d-flex gap-2 align-items-center">
+            <button id="my-form-button" type="submit" class="btn btn-custom">Send Message</button>
+            <div id="my-form-status" class="form-status ms-2"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-4">
+    <div class="container text-center">
+      <small class="muted">&copy; <span id="year"></span> Md. Anwar Hossain — Full-Stack Developer</small>
+    </div>
+  </footer>
+
+  <!-- GO TOP BUTTON -->
+  <button id="goTop" aria-label="Go to top" title="Go to top">
+    <i class="bi bi-arrow-up-short fs-4"></i>
+  </button>
+
+  <!-- SCRIPTS: jQuery, Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AOS (optional small animation lib) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Init AOS
+    AOS.init({duration:700, once:true});
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Show GoTop on scroll
+    const goTop = document.getElementById('goTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) { goTop.classList.add('show'); }
+      else { goTop.classList.remove('show'); }
+    });
+    goTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // jQuery AJAX form submission (Formspree)
+    $(function(){
+      $('#my-form').on('submit', function(e){
+        e.preventDefault();
+        const $form = $(this);
+        const $status = $('#my-form-status');
+        const $btn = $('#my-form-button');
+
+        $status.css('color','').text('');
+        $btn.prop('disabled', true).text('Sending...');
+
+        $.ajax({
+          url: $form.attr('action'),
+          method: $form.attr('method'),
+          data: $form.serialize(),
+          dataType: 'json',
+          headers: { 'Accept': 'application/json' },
+        }).done(function(data){
+          $status.css('color','green').text('Thanks — your message has been sent!');
+          $form[0].reset();
+        }).fail(function(jqXHR){
+          let msg = 'Oops! There was a problem submitting the form';
+          try {
+            const res = jqXHR.responseJSON;
+            if (res && res.errors) msg = res.errors.map(e => e.message).join(', ');
+          } catch (err) { }
+          $status.css('color','crimson').text(msg);
+        }).always(function(){
+          $btn.prop('disabled', false).text('Send Message');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
